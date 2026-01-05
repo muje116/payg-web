@@ -1,0 +1,10 @@
+0000000000000000000000000000000000000000 0317538f0ff2a3914b6325d9dfdb23d118093794 James Simbi <james@sparcsystems.africa> 1754910569 +0200	commit (initial): first commit
+0317538f0ff2a3914b6325d9dfdb23d118093794 0317538f0ff2a3914b6325d9dfdb23d118093794 James Simbi <james@sparcsystems.africa> 1754910570 +0200	Branch: renamed refs/heads/master to refs/heads/main
+0317538f0ff2a3914b6325d9dfdb23d118093794 099106311c6d72048079488fff8afa616b67e492 James Simbi <james@sparcsystems.africa> 1754910611 +0200	commit: Initial commit of the project structure and files.
+099106311c6d72048079488fff8afa616b67e492 f1eb66f5f834d3fd07d4b45974fdec2970a6e819 James Simbi <james@sparcsystems.africa> 1754913906 +0200	commit: Refactor authentication and upload pages to improve error handling and user feedback. Updated API calls for login and sermon uploads, added loading states, and enhanced form management across various upload components.
+f1eb66f5f834d3fd07d4b45974fdec2970a6e819 8525b3db75b041dfed355e03daa63196363eb015 James Simbi <james@sparcsystems.africa> 1754925510 +0200	commit: Update asset manifest and dashboard layout; refactor image and themes pages for improved navigation and error handling. Replace old JavaScript files with new versions and enhance API data fetching in the dashboard.
+8525b3db75b041dfed355e03daa63196363eb015 85ce7d585eebba7e29c00c11739b6009e15c68d9 James Simbi <james@sparcsystems.africa> 1755093916 +0200	commit: Updated themeid
+85ce7d585eebba7e29c00c11739b6009e15c68d9 2279ca06ba8c8de037e051ea000a7c1c246867a5 James Simbi <james@sparcsystems.africa> 1756908048 +0200	commit: updated sermon uploading
+2279ca06ba8c8de037e051ea000a7c1c246867a5 2279ca06ba8c8de037e051ea000a7c1c246867a5 James Simbi <james@sparcsystems.africa> 1767623823 +0200	Branch: renamed refs/heads/main to refs/heads/main
+2279ca06ba8c8de037e051ea000a7c1c246867a5 d2a690e2390619195f306e05d1beda6755fdf1b8 James Simbi <james@sparcsystems.africa> 1767623839 +0200	commit: first commit
+d2a690e2390619195f306e05d1beda6755fdf1b8 d2a690e2390619195f306e05d1beda6755fdf1b8 James Simbi <james@sparcsystems.africa> 1767623840 +0200	Branch: renamed refs/heads/main to refs/heads/main
