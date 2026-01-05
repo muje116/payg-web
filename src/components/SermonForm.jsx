@@ -31,6 +31,13 @@ export default function SermonForm({ initial, onSubmit, loading, submitLabel = "
 
   function handleSubmit(e) {
     e.preventDefault();
+    
+    // Validate image requirement for new sermons
+    if (!initial && !selectedFile) {
+      alert("Please select a cover image for the sermon.");
+      return;
+    }
+
     // Ensure themeId is an int if present
     const submitForm = {
       ...form,

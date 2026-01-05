@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { 
-  getSermons, 
-  getRecentSermons, 
-  getSermonsPerTheme, 
-  deleteSermon, 
-  putSermon, 
+import {
+  getSermons,
+  getRecentSermons,
+  getSermonsPerTheme,
+  deleteSermon,
+  putSermon,
   postSermon,
-  uploadSermonImage 
+  uploadSermonImage
 } from "../api/sermons";
 import Loader from "../components/Loader";
 import SermonCard from "../components/SermonCard";
@@ -68,7 +68,7 @@ export default function SermonsPage() {
   }
   async function handleThemeChange(e) {
     const themeId = e.target.value;
-      setSelectedTheme(themeId);
+    setSelectedTheme(themeId);
     setActiveTab("theme");
     setLoading(true);
     setError("");
@@ -127,13 +127,14 @@ export default function SermonsPage() {
     setError("");
     try {
       let sermonId;
-      
+      let uploadDetails = "";
+
       // Check if we have a file to upload
       const file = form.file;
-      
+
       // Remove the file from form data before sending to sermon API
       const { file: _, ...sermonData } = form;
-      
+
       if (editSermon) {
         // Update existing sermon
         await putSermon(editSermon.id, sermonData);
@@ -145,24 +146,38 @@ export default function SermonsPage() {
         sermonId = res.data.id;
         setSermons(s => [...s, res.data]);
       }
-      
+
       // Upload image if a file was selected
       if (file) {
         try {
-          await uploadSermonImage(sermonId, file);
+          const uploadRes = await uploadSermonImage(sermonId, file);
+          console.log("Image upload response:", uploadRes.data);
+          // Assuming the response data contains the filename or URI
+          // If it's a string or object, we stringify if needed
+          uploadDetails = typeof uploadRes.data === 'string'
+            ? uploadRes.data
+            : JSON.stringify(uploadRes.data);
+
           // Refresh sermons to get the updated image
           const updatedSermons = await getSermons();
           setSermons(updatedSermons.data);
         } catch (uploadError) {
           console.error("Error uploading image:", uploadError);
-          setError("Sermon saved, but there was an error uploading the image");
+          const msg = uploadError.response?.data?.message || uploadError.response?.data || "Error uploading image";
+          setError(`Sermon saved, but image upload failed: ${msg}`);
+          return; // Don't close modal if upload failed
         }
       }
-      
+
+      if (uploadDetails) {
+        alert(`Sermon saved and image uploaded successfully!\n\nImage Details: ${uploadDetails}`);
+      }
+
       setShowModal(false);
     } catch (e) {
       console.error("Error saving sermon:", e);
-      setError("Failed to save sermon");
+      const msg = e.response?.data?.message || e.response?.data || "Failed to save sermon";
+      setError(`Error: ${msg}`);
     } finally {
       setActionLoading(false);
     }
@@ -204,21 +219,19 @@ export default function SermonsPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
             <div className="flex space-x-2">
               <button
-                className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-200 ${
-                  activeTab === "all" 
-                    ? "bg-blue-600 text-white shadow-md" 
+                className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-200 ${activeTab === "all"
+                    ? "bg-blue-600 text-white shadow-md"
                     : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                }`}
+                  }`}
                 onClick={() => handleTab("all")}
               >
                 All
               </button>
               <button
-                className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-200 ${
-                  activeTab === "recent" 
-                    ? "bg-indigo-600 text-white shadow-md" 
+                className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-200 ${activeTab === "recent"
+                    ? "bg-indigo-600 text-white shadow-md"
                     : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                }`}
+                  }`}
                 onClick={() => handleTab("recent")}
               >
                 Recent
