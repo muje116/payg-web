@@ -14,34 +14,29 @@ export default function AudioPlayer({ src, title = "Audio", className = "" }) {
 
     const updateTime = () => setCurrentTime(audio.currentTime);
     const updateDuration = () => setDuration(audio.duration);
-    const handlePlay = () => setIsPlaying(true);
-    const handlePause = () => setIsPlaying(false);
-    const handleEnded = () => setIsPlaying(false);
+    const handlePlayPause = () => setIsPlaying(!audio.paused);
 
     audio.addEventListener('timeupdate', updateTime);
     audio.addEventListener('loadedmetadata', updateDuration);
-    audio.addEventListener('play', handlePlay);
-    audio.addEventListener('pause', handlePause);
-    audio.addEventListener('ended', handleEnded);
+    audio.addEventListener('play', handlePlayPause);
+    audio.addEventListener('pause', handlePlayPause);
+    audio.addEventListener('ended', handlePlayPause);
 
-    // Set playback rate when changed
     audio.playbackRate = playbackRate;
 
     return () => {
       audio.removeEventListener('timeupdate', updateTime);
       audio.removeEventListener('loadedmetadata', updateDuration);
-      audio.removeEventListener('play', handlePlay);
-      audio.removeEventListener('pause', handlePause);
-      audio.removeEventListener('ended', handleEnded);
+      audio.removeEventListener('play', handlePlayPause);
+      audio.removeEventListener('pause', handlePlayPause);
+      audio.removeEventListener('ended', handlePlayPause);
     };
   }, [playbackRate]);
 
   const togglePlay = () => {
-    if (isPlaying) {
-      audioRef.current?.pause();
-    } else {
-      audioRef.current?.play();
-    }
+    const audio = audioRef.current;
+    if (!audio) return;
+    isPlaying ? audio.pause() : audio.play();
   };
 
   const handleSeek = (e) => {

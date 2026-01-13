@@ -184,164 +184,154 @@ export default function SermonsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      {/* Top Navigation Bar */}
-      <nav className="bg-blue-600 text-white shadow-lg">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex justify-between items-center py-4">
-            <div className="flex items-center space-x-8">
-              <h1 className="text-xl font-bold">Admin Panel</h1>
-              <div className="hidden md:flex space-x-6">
-                <a href="/dashboard" className="hover:text-blue-200">Dashboard</a>
-                <a href="/sermons" className="hover:text-blue-200 font-medium">Sermons</a>
-                <a href="/themes" className="hover:text-blue-200">Themes</a>
-                <a href="/images" className="hover:text-blue-200">Images</a>
-              </div>
-            </div>
-            <a href="/login" className="hover:text-blue-200">Logout</a>
-          </div>
+    <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div>
+          <h2 className="text-4xl font-black text-white tracking-tight">Sermons</h2>
+          <p className="text-gray-400 mt-1">Manage and organize your sermon library</p>
         </div>
-      </nav>
+        <button
+          onClick={handleAdd}
+          className="bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-2xl font-bold shadow-xl shadow-blue-500/20 transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center space-x-2"
+        >
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M12 4v16m8-8H4" />
+          </svg>
+          <span>Add New Sermon</span>
+        </button>
+      </div>
 
-      {/* Main Content and Modal Wrapper */}
-      <div>
-        <div className="max-w-7xl mx-auto px-4 py-8">
-          <div className="flex justify-between items-center mb-8">
-            <h2 className="text-3xl font-bold text-gray-900">Sermons</h2>
+      {/* Modern Filters Tray */}
+      <div className="bg-gray-800/40 backdrop-blur-xl rounded-3xl p-6 border border-white/5 space-y-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="flex bg-white/5 p-1 rounded-2xl">
             <button
-              onClick={handleAdd}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-semibold shadow-lg transition-all duration-200"
+              className={`flex-1 px-6 py-3 rounded-xl font-bold text-sm transition-all duration-300 ${activeTab === "all"
+                ? "bg-blue-600 text-white shadow-lg shadow-blue-500/20"
+                : "text-gray-400 hover:text-white"
+                }`}
+              onClick={() => handleTab("all")}
             >
-              Add New Sermon
+              All
+            </button>
+            <button
+              className={`flex-1 px-6 py-3 rounded-xl font-bold text-sm transition-all duration-300 ${activeTab === "recent"
+                ? "bg-indigo-600 text-white shadow-lg shadow-indigo-500/20"
+                : "text-gray-400 hover:text-white"
+                }`}
+              onClick={() => handleTab("recent")}
+            >
+              Recent
             </button>
           </div>
-          {/* Filters and Search */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-            <div className="flex space-x-2">
-              <button
-                className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-200 ${activeTab === "all"
-                    ? "bg-blue-600 text-white shadow-md"
-                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                  }`}
-                onClick={() => handleTab("all")}
-              >
-                All
-              </button>
-              <button
-                className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-200 ${activeTab === "recent"
-                    ? "bg-indigo-600 text-white shadow-md"
-                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                  }`}
-                onClick={() => handleTab("recent")}
-              >
-                Recent
-              </button>
-            </div>
-            <div>
-              <select
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-700 text-sm"
-                value={selectedTheme}
-                onChange={handleThemeChange}
-              >
-                <option value="">All Themes</option>
-                {themes.map(theme => (
-                  <option key={theme.id} value={theme.id}>{theme.name}</option>
-                ))}
-              </select>
-            </div>
-            <div className="md:col-span-2">
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                  </svg>
-                </div>
-                <input
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-700 text-sm"
-                  placeholder="Search sermons by title or preacher..."
-                  value={search}
-                  onChange={handleSearch}
-                />
-              </div>
+
+          <div className="relative">
+            <select
+              className="w-full pl-4 pr-10 py-4 bg-white/5 border border-white/10 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none text-white text-sm font-medium appearance-none transition-all cursor-pointer"
+              value={selectedTheme}
+              onChange={handleThemeChange}
+            >
+              <option value="" className="bg-gray-900">All Themes</option>
+              {themes.map(theme => (
+                <option key={theme.id} value={theme.id} className="bg-gray-900">{theme.name}</option>
+              ))}
+            </select>
+            <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none text-gray-400">
+              <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+              </svg>
             </div>
           </div>
-          {error && (
-            <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
-              <div className="flex items-center">
-                <svg className="w-5 h-5 text-red-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+
+          <div className="md:col-span-2">
+            <div className="relative group">
+              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                <svg className="h-5 w-5 text-gray-500 group-focus-within:text-blue-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
-                <span className="text-red-800 font-medium">{error}</span>
               </div>
-            </div>
-          )}
-          {loading ? (
-            <div className="bg-white rounded-xl shadow-lg p-8">
-              <div className="flex flex-col items-center justify-center min-h-[300px]">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mb-4"></div>
-                <p className="text-gray-500 text-lg">Loading sermons...</p>
-              </div>
-            </div>
-          ) : (
-            <div className="bg-white rounded-lg shadow overflow-hidden">
-              <SermonsTable
-                sermons={filteredSermons()}
-                onEdit={handleEdit}
-                onDelete={handleDelete}
-                page={page}
-                pageSize={pageSize}
-                total={filteredSermons().length}
-                onPageChange={setPage}
+              <input
+                className="w-full pl-12 pr-4 py-4 bg-white/5 border border-white/10 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none text-white placeholder-gray-500 text-sm transition-all"
+                placeholder="Search sermons by title or preacher..."
+                value={search}
+                onChange={handleSearch}
               />
             </div>
-          )}
+          </div>
         </div>
-        {/* Enhanced Modal for Add/Edit Sermon */}
-        {showModal && (
-          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-            <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto relative transform transition-all duration-300 scale-100">
-              {/* Modal Header */}
-              <div className="sticky top-0 bg-white border-b border-gray-200 px-8 py-6 rounded-t-2xl">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center">
-                      <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                      </svg>
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-bold text-gray-900">
-                        {editSermon ? "Edit Sermon" : "Add New Sermon"}
-                      </h3>
-                      <p className="text-sm text-gray-500">
-                        {editSermon ? "Update sermon information" : "Create a new sermon entry"}
-                      </p>
-                    </div>
-                  </div>
-                  <button
-                    className="w-8 h-8 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center text-gray-500 hover:text-gray-700 transition-all duration-200"
-                    onClick={() => setShowModal(false)}
-                  >
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-              {/* Modal Body */}
-              <div className="px-8 py-6">
-                <SermonForm
-                  initial={editSermon}
-                  onSubmit={handleSubmit}
-                  loading={actionLoading}
-                  submitLabel={editSermon ? "Update Sermon" : "Create Sermon"}
-                  themes={themes}
-                />
-              </div>
-            </div>
+
+        {error && (
+          <div className="bg-rose-500/10 border border-rose-500/20 rounded-2xl p-4 flex items-center space-x-3 text-rose-400">
+            <svg className="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span className="text-sm font-bold">{error}</span>
           </div>
         )}
       </div>
+
+      {loading ? (
+        <div className="bg-gray-800/40 backdrop-blur-xl rounded-3xl p-20 flex flex-col items-center justify-center space-y-4 border border-white/5">
+          <div className="relative w-16 h-16">
+            <div className="absolute inset-0 rounded-full border-4 border-white/5 animate-pulse"></div>
+            <div className="absolute inset-0 rounded-full border-4 border-blue-500 border-t-transparent animate-spin"></div>
+          </div>
+          <p className="text-gray-400 font-bold animate-pulse">Consulting the library...</p>
+        </div>
+      ) : (
+        <SermonsTable
+          sermons={filteredSermons()}
+          onEdit={handleEdit}
+          onDelete={handleDelete}
+          page={page}
+          pageSize={pageSize}
+          total={filteredSermons().length}
+          onPageChange={setPage}
+        />
+      )}
+
+      {/* Enhanced Modal for Add/Edit Sermon */}
+      {showModal && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-xl flex items-center justify-center z-[100] p-4 animate-in fade-in duration-300">
+          <div className="bg-gray-900 rounded-[2.5rem] border border-white/10 shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden relative animate-in zoom-in-95 duration-300">
+            {/* Modal Header */}
+            <div className="px-10 py-8 border-b border-white/5 flex items-center justify-between">
+              <div className="flex items-center space-x-4">
+                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg transform rotate-3">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 4v16m8-8H4" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="text-2xl font-black text-white tracking-tight">
+                    {editSermon ? "Edit Sermon" : "Add Sermon"}
+                  </h3>
+                  <p className="text-gray-400 text-sm">Fill in the details below</p>
+                </div>
+              </div>
+              <button
+                className="w-10 h-10 bg-white/5 hover:bg-white/10 rounded-xl flex items-center justify-center text-gray-400 hover:text-white transition-all transform hover:rotate-90"
+                onClick={() => setShowModal(false)}
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Modal Body */}
+            <div className="px-10 py-8 overflow-y-auto max-h-[calc(90vh-140px)] custom-scrollbar">
+              <SermonForm
+                initial={editSermon}
+                onSubmit={handleSubmit}
+                loading={actionLoading}
+                submitLabel={editSermon ? "Update Global Record" : "Publish to Library"}
+                themes={themes}
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

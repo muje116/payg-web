@@ -9,10 +9,11 @@ import ThemeUploadPage from "../pages/ThemeUploadPage";
 import ImagesPage from "../pages/ImagesPage";
 import ImageUploadPage from "../pages/ImageUploadPage";
 import { AuthContext } from "../contexts/AuthContext";
+import MainLayout from "../components/MainLayout";
 
 function PrivateRoute({ children }) {
   const { token } = useContext(AuthContext);
-  return token ? children : <Navigate to="/login" />;
+  return token ? <MainLayout>{children}</MainLayout> : <Navigate to="/login" />;
 }
 
 export default function AppRoutes() {
