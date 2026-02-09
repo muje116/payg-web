@@ -12,5 +12,9 @@ export default defineConfig({
   },
   server: {
     port: 3000,
+    allowedHosts: ['payg.rfpministries.com'],
+  },
+  preview: {
+    allowedHosts: ['payg.rfpministries.com'],
   },
 });
