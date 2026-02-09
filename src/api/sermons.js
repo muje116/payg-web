@@ -1,6 +1,6 @@
 import axios from "axios";
 import { getToken } from "../utils/token";
-const API_BASE = "https://corsproxy.io/?http://wannie18-002-site2.btempurl.com/api";
+import { DATA_API_BASE } from "./config";
 
 function authHeaders() {
   return { Authorization: `Bearer ${getToken()}` };
@@ -13,7 +13,7 @@ export async function uploadSermonImage(sermonId, imageFile) {
   formData.append('image', imageFile);
   
   // Include SermonId as a query parameter in the URL
-  return axios.post(`${API_BASE}/SermonImage/sermonImage?SermonId=${sermonId}`, formData, { 
+  return axios.post(`${DATA_API_BASE}/SermonImage/sermonImage?SermonId=${sermonId}`, formData, { 
     headers: { 
       ...authHeaders(),
       'accept': 'text/plain',
@@ -24,36 +24,36 @@ export async function uploadSermonImage(sermonId, imageFile) {
 
 // GET /api/Sermons/GetSermons
 export async function getSermons() {
-  return axios.get(`${API_BASE}/Sermons/GetSermons`, { headers: authHeaders() });
+  return axios.get(`${DATA_API_BASE}/Sermons/GetSermons`, { headers: authHeaders() });
 }
 
 // GET /api/Sermons/GetSermonsPerTheme/{themeId}
 export async function getSermonsPerTheme(themeId) {
-  return axios.get(`${API_BASE}/Sermons/GetSermonsPerTheme/${themeId}`, { headers: authHeaders() });
+  return axios.get(`${DATA_API_BASE}/Sermons/GetSermonsPerTheme/${themeId}`, { headers: authHeaders() });
 }
 
 // GET /api/Sermons/GetSermonUri/sermonTitle
 export async function getSermonUri(sermonTitle) {
-  return axios.get(`${API_BASE}/Sermons/GetSermonUri/${encodeURIComponent(sermonTitle)}`, { headers: authHeaders() });
+  return axios.get(`${DATA_API_BASE}/Sermons/GetSermonUri/${encodeURIComponent(sermonTitle)}`, { headers: authHeaders() });
 }
 
 // GET /api/Sermons/GetRecentSermons
 export async function getRecentSermons() {
-  return axios.get(`${API_BASE}/Sermons/GetRecentSermons`, { headers: authHeaders() });
+  return axios.get(`${DATA_API_BASE}/Sermons/GetRecentSermons`, { headers: authHeaders() });
 }
 
 // POST /api/Sermons/PostSermon
 export async function postSermon(sermon) {
-  return axios.post(`${API_BASE}/Sermons/PostSermon`, sermon, { headers: authHeaders() });
+  return axios.post(`${DATA_API_BASE}/Sermons/PostSermon`, sermon, { headers: authHeaders() });
 }
 
 // PUT /api/Sermons/PutSermon/{id}
 export async function putSermon(id, sermon) {
-  return axios.put(`${API_BASE}/Sermons/PutSermon/${id}`, sermon, { headers: authHeaders() });
+  return axios.put(`${DATA_API_BASE}/Sermons/PutSermon/${id}`, sermon, { headers: authHeaders() });
 }
 
 // DELETE /api/Sermons/DeleteSermon/{id}
 export async function deleteSermon(id) {
-  return axios.delete(`${API_BASE}/Sermons/DeleteSermon/${id}`, { headers: authHeaders() });
+  return axios.delete(`${DATA_API_BASE}/Sermons/DeleteSermon/${id}`, { headers: authHeaders() });
 }
 
