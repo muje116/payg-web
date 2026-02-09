@@ -8,6 +8,7 @@ import {
   postSermon,
   uploadSermonImage
 } from "../api/sermons";
+import { getThemes } from "../api/themes";
 import Loader from "../components/Loader";
 import SermonsTable from "../components/SermonsTable";
 import SermonForm from "../components/SermonForm";
@@ -46,7 +47,6 @@ export default function SermonsPage() {
 
   async function fetchThemes() {
     try {
-      const { getThemes } = await import("../api/themes");
       const res = await getThemes();
       setThemes(res.data);
     } catch (e) {
