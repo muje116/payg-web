@@ -25,7 +25,7 @@ export function AuthProvider({ children }) {
       setUser(userPayload);
       return true;
     } catch (e) {
-      return false;
+      throw new Error(e.response?.data?.message || e.message || "Login failed");
     }
   };
 

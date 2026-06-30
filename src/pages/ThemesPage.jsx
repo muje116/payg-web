@@ -5,7 +5,7 @@ import Loader from "../components/Loader";
 import ThemeForm from "../components/ThemeForm";
 import ThemeCard from "../components/ThemeCard";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, Play, Plus, Search } from "lucide-react";
+import { ArrowLeft, Play, Plus, Search, Folder } from "lucide-react";
 import { usePlayer } from "../contexts/PlayerContext";
 
 export default function ThemesPage() {
@@ -150,9 +150,16 @@ export default function ThemesPage() {
               />
             </div>
 
-            {/* Grid */}
             {loading ? (
               <Loader />
+            ) : filteredThemes.length === 0 ? (
+              <div className="py-20 flex flex-col items-center justify-center text-center space-y-4">
+                <div className="w-20 h-20 bg-gray-700/50 rounded-full flex items-center justify-center border-2 border-dashed border-gray-600">
+                  <Folder size={32} className="text-gray-500" />
+                </div>
+                <p className="text-gray-400 font-bold">No themes found</p>
+                <p className="text-gray-500 text-sm">Try adjusting your search or create a new theme</p>
+              </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {filteredThemes.map(theme => (
@@ -248,7 +255,7 @@ export default function ThemesPage() {
           <div className="bg-gray-800 rounded-2xl shadow-2xl w-full max-w-md p-6 border border-gray-700">
             <h3 className="text-xl font-bold text-white mb-4">{editTheme ? "Edit Theme" : "Create Theme"}</h3>
             <ThemeForm 
-              initialData={editTheme} 
+              initial={editTheme} 
               onSubmit={handleSubmit} 
               onCancel={() => setShowModal(false)} 
               loading={actionLoading}

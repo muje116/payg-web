@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { usePlayer } from "../contexts/PlayerContext";
 import { AppContext } from "../contexts/AppContext";
-import { Play, Heart, Plus, Edit2, Trash2, Calendar, User, ListPlus } from "lucide-react";
+import { Play, Heart, Edit2, Trash2, Calendar, User, ListPlus, Plus, Music } from "lucide-react";
 
 export default function SermonsTable({ sermons, onEdit, onDelete, page = 1, pageSize = 10, total = 0, onPageChange }) {
   const { playTrack, addToQueue } = usePlayer();
@@ -10,6 +10,18 @@ export default function SermonsTable({ sermons, onEdit, onDelete, page = 1, page
   const end = start + pageSize;
   const pagedSermons = sermons.slice(start, end);
   const totalPages = Math.max(1, Math.ceil(total / pageSize));
+
+  if (!sermons?.length) {
+    return (
+      <div className="bg-gray-800/40 backdrop-blur-xl rounded-2xl border border-white/5 py-20 flex flex-col items-center justify-center text-center space-y-4">
+        <div className="w-20 h-20 bg-gray-700/50 rounded-full flex items-center justify-center border-2 border-dashed border-gray-600">
+          <Music size={32} className="text-gray-500" />
+        </div>
+        <p className="text-gray-400 font-bold">No sermons found</p>
+        <p className="text-gray-500 text-sm">Try adjusting your search or add a new sermon</p>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-gray-800/40 backdrop-blur-xl rounded-2xl shadow-2xl overflow-hidden border border-white/5">

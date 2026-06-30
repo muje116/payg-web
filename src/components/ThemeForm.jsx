@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function ThemeForm({ initial, onSubmit, loading, submitLabel = "Save" }) {
+  const navigate = useNavigate();
   const [form, setForm] = useState(
     initial || {
       name: "",
@@ -28,7 +30,7 @@ export default function ThemeForm({ initial, onSubmit, loading, submitLabel = "S
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="md:col-span-2">
-          <label className="block text-sm font-semibold text-gray-700 mb-2">
+          <label className="block text-sm font-semibold text-gray-300 mb-2">
             Name <span className="text-red-500">*</span>
           </label>
           <input
@@ -36,13 +38,13 @@ export default function ThemeForm({ initial, onSubmit, loading, submitLabel = "S
             value={form.name}
             onChange={handleChange}
             required
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 bg-white shadow-sm hover:shadow-md"
+            className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none text-white placeholder-gray-600 transition-all"
             placeholder="Enter theme name"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">
+          <label className="block text-sm font-semibold text-gray-300 mb-2">
             Date Added
           </label>
           <input
@@ -50,25 +52,25 @@ export default function ThemeForm({ initial, onSubmit, loading, submitLabel = "S
             value={form.dateAdded}
             onChange={handleChange}
             type="datetime-local"
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 bg-white shadow-sm hover:shadow-md"
+            className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none text-white transition-all"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">
+          <label className="block text-sm font-semibold text-gray-300 mb-2">
             Added By
           </label>
           <input
             name="addedBy"
             value={form.addedBy}
             onChange={handleChange}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 bg-white shadow-sm hover:shadow-md"
+            className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none text-white placeholder-gray-600 transition-all"
             placeholder="Enter name of person who added"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">
+          <label className="block text-sm font-semibold text-gray-300 mb-2">
             Date Edited
           </label>
           <input
@@ -76,32 +78,32 @@ export default function ThemeForm({ initial, onSubmit, loading, submitLabel = "S
             value={form.dateEdited}
             onChange={handleChange}
             type="datetime-local"
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 bg-white shadow-sm hover:shadow-md"
+            className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none text-white transition-all"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">
+          <label className="block text-sm font-semibold text-gray-300 mb-2">
             Edited By
           </label>
           <input
             name="editedBy"
             value={form.editedBy}
             onChange={handleChange}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 bg-white shadow-sm hover:shadow-md"
+            className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none text-white placeholder-gray-600 transition-all"
             placeholder="Enter name of person who edited"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">
+          <label className="block text-sm font-semibold text-gray-300 mb-2">
             Status
           </label>
           <select
             name="voided"
             value={form.voided}
             onChange={handleChange}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 bg-white shadow-sm hover:shadow-md"
+            className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none text-white transition-all"
           >
             <option value={0}>Active</option>
             <option value={1}>Voided</option>
@@ -109,45 +111,45 @@ export default function ThemeForm({ initial, onSubmit, loading, submitLabel = "S
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">
+          <label className="block text-sm font-semibold text-gray-300 mb-2">
             Voided By
           </label>
           <input
             name="voidedBy"
             value={form.voidedBy}
             onChange={handleChange}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 bg-white shadow-sm hover:shadow-md"
+            className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none text-white placeholder-gray-600 transition-all"
             placeholder="Enter name of person who voided"
             disabled={form.voided == 0}
           />
         </div>
 
         <div className="md:col-span-2">
-          <label className="block text-sm font-semibold text-gray-700 mb-2">
+          <label className="block text-sm font-semibold text-gray-300 mb-2">
             Image URL
           </label>
           <input
             name="imageUrl"
             value={form.imageUrl}
             onChange={handleChange}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 bg-white shadow-sm hover:shadow-md"
+            className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none text-white placeholder-gray-600 transition-all"
             placeholder="https://example.com/theme-image.jpg"
           />
         </div>
       </div>
 
-      <div className="flex items-center justify-end space-x-4 pt-6 border-t border-gray-200">
+      <div className="flex items-center justify-end space-x-4 pt-6 border-t border-white/10">
         <button
           type="button"
-          className="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-all duration-200 font-medium"
-          onClick={() => window.history.back()}
+          className="px-6 py-3 border border-white/10 text-gray-300 rounded-xl hover:bg-white/10 transition-all font-medium"
+          onClick={() => navigate(-1)}
         >
           Cancel
         </button>
         <button
           type="submit"
           disabled={loading}
-          className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
+          className="inline-flex items-center px-6 py-3 rounded-xl text-white bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg hover:shadow-xl font-medium"
         >
           {loading ? (
             <>

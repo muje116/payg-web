@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { postTheme } from "../api/themes";
-import Sidebar from "../components/Sidebar";
-
 export default function ThemeUploadPage() {
   const [form, setForm] = useState({ title: "", date: "", content: "" });
   const [success, setSuccess] = useState("");

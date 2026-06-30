@@ -19,11 +19,9 @@ export default function LoginPage() {
       const success = await login(username, password);
       if (success) {
         navigate("/dashboard");
-      } else {
-        setError("Invalid username or password");
       }
     } catch (err) {
-      setError("Login failed. Please try again.");
+      setError(err.message || "Login failed. Please try again.");
     } finally {
       setLoading(false);
     }

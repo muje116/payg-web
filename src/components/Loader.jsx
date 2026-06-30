@@ -19,11 +19,11 @@ export default function Loader({ size = "md", text = "Loading...", variant = "sp
     return (
       <div className="flex flex-col items-center justify-center h-40 space-y-4">
         <div className="flex space-x-2">
-          <div className="w-3 h-3 bg-blue-600 rounded-full animate-bounce"></div>
-          <div className="w-3 h-3 bg-blue-600 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-          <div className="w-3 h-3 bg-blue-600 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+          <div className="w-3 h-3 bg-blue-500 rounded-full animate-bounce"></div>
+          <div className="w-3 h-3 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+          <div className="w-3 h-3 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
         </div>
-        {text && <p className={`text-gray-600 ${textSizes[size]}`}>{text}</p>}
+        {text && <p className={`text-gray-400 ${textSizes[size]}`}>{text}</p>}
       </div>
     );
   }
@@ -31,17 +31,16 @@ export default function Loader({ size = "md", text = "Loading...", variant = "sp
   if (variant === "pulse") {
     return (
       <div className="flex flex-col items-center justify-center h-40 space-y-4">
-        <div className={`${sizeClasses[size]} bg-blue-600 rounded-full animate-pulse`}></div>
-        {text && <p className={`text-gray-600 ${textSizes[size]}`}>{text}</p>}
+        <div className={`${sizeClasses[size]} bg-blue-500 rounded-full animate-pulse`}></div>
+        {text && <p className={`text-gray-400 ${textSizes[size]}`}>{text}</p>}
       </div>
     );
   }
 
-  // Default spinner
   return (
     <div className="flex flex-col items-center justify-center h-40 space-y-4">
-      <div className={`animate-spin rounded-full ${sizeClasses[size]} border-4 border-gray-200 border-t-blue-600`}></div>
-      {text && <p className={`text-gray-600 ${textSizes[size]}`}>{text}</p>}
+      <div className={`animate-spin rounded-full ${sizeClasses[size]} border-4 border-gray-700 border-t-blue-500`}></div>
+      {text && <p className={`text-gray-400 ${textSizes[size]}`}>{text}</p>}
     </div>
   );
 }

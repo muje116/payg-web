@@ -4,13 +4,21 @@ export const AppContext = createContext();
 
 export function AppProvider({ children }) {
     const [playlist, setPlaylist] = useState(() => {
-        const saved = localStorage.getItem("playlist");
-        return saved ? JSON.parse(saved) : [];
+        try {
+            const saved = localStorage.getItem("playlist");
+            return saved ? JSON.parse(saved) : [];
+        } catch {
+            return [];
+        }
     });
 
     const [favorites, setFavorites] = useState(() => {
-        const saved = localStorage.getItem("favorites");
-        return saved ? JSON.parse(saved) : [];
+        try {
+            const saved = localStorage.getItem("favorites");
+            return saved ? JSON.parse(saved) : [];
+        } catch {
+            return [];
+        }
     });
 
     useEffect(() => {

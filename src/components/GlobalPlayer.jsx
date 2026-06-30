@@ -38,6 +38,7 @@ export default function GlobalPlayer() {
   return (
     <AnimatePresence>
       <motion.div
+        key="global-player"
         initial={{ y: 100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         exit={{ y: 100, opacity: 0 }}

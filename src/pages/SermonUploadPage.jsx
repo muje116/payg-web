@@ -1,7 +1,5 @@
 import React, { useState, useRef } from "react";
 import { postSermon, uploadSermonImage, getRecentSermons } from "../api/sermons";
-import Sidebar from "../components/Sidebar";
-
 export default function SermonUploadPage() {
   const [form, setForm] = useState({ title: "", dateLoaded: new Date().toISOString().slice(0, 16), preacher: "", sermonLink: "" });
   const [selectedFile, setSelectedFile] = useState(null);

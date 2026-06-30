@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { uploadImage } from "../api/images";
-import Sidebar from "../components/Sidebar";
-
 export default function ImageUploadPage() {
   const [file, setFile] = useState(null);
   const [title, setTitle] = useState("");
